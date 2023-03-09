@@ -1,0 +1,68 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "SamSung",
+      "description": "Phone product",
+      "price": 5000,
+      "Category": "Telephone",
+      "image": "https://www.androidauthority.com/wp-content/uploads/2022/02/Samsung-Galaxy-S22-Ultra-color-family-on-wood.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Mini Samsung",
+      "description": "Tablet product",
+      "price": 10000,
+      "Category": "Telephone",
+      "image": "https://images.samsung.com/uk/smartphones/galaxy-s22-ultra/buy/03_color-selection/01_device-images/s22ultra_colorselection_green_pc.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Iphone",
+      "description": "Apple product",
+      "price": 100000,
+      "Category": "Telephone",
+      "image": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone14pro-202209_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1663611329204"
+    },
+    {
+      "id": 4,
+      "name": "Iphone",
+      "description": "Apple product",
+      "price": 100000,
+      "Category": "Telephone",
+      "image": "https://www.passionateinmarketing.com/wp-content/uploads/2021/09/laptop1.png"
+    },
+    {
+      "name": "DELL LATITUDE",
+      "description": "eeeeee",
+      "price": "700000",
+      "Category": "Laptops",
+      "image": "https://www.passionateinmarketing.com/wp-content/uploads/2021/09/laptop1.png",
+      "id": 5
+    },
+    {
+      "name": "HP",
+      "description": "fghjhgfdfs",
+      "price": "50000",
+      "Category": "Desktops",
+      "image": "https://www.passionateinmarketing.com/wp-content/uploads/2021/09/laptop1.png",
+      "id": 6
+    },
+    {
+      "name": "DELL LATITUDE",
+      "description": "wwwwwww",
+      "price": "677778",
+      "Category": "Desktops",
+      "image": "https://www.passionateinmarketing.com/wp-content/uploads/2021/09/laptop1.png",
+      "id": 7
+    },
+    {
+      "name": "DELL LATITUDE",
+      "description": "wwwwwww",
+      "price": "677778",
+      "Category": "Desktops",
+      "image": "https://www.passionateinmarketing.com/wp-content/uploads/2021/09/laptop1.png",
+      "id": 8
+    }
+  ]
+}
