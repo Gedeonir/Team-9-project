@@ -3,6 +3,8 @@ import { Routes,Route } from 'react-router';
 import Navigation from './Components/Navigation';
 import './App.css';
 import Footer from './Components/footer';
+import Cards from './Components/Cards';
+
 function App() {
   return ( 
     <div>
@@ -11,6 +13,8 @@ function App() {
         
         </Route>
         <Route path='/Footer' element={<Footer/>}/>
+
+        <Route path="/cards" element={<Cards/>}></Route>
       </Routes>
     </div>
   );
