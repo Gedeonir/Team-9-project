@@ -9,7 +9,7 @@ export default function Cards() {
     const [openModal,setOpenModal]=useState(false)
 
   return (
-    <><div className="lg:flex justify-between px-8 sm:block py-3">
+    <><div className="lg:flex justify-between px-8 sm:block py-20">
           <div className="mb-2 lg:w-64 sm:w-full">
               <input type="text"
                   id="searchWord"
