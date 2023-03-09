@@ -5,12 +5,12 @@ import Logo from '../imgs/Logo.jpg'
 
 export default function Navigation() {
   return (
-    <nav>
-    <div class=" bg-indigo-100 py-1">
+    <nav className='fixed left-0 right-0 top-0'>
+    <div class=" bg-indigo-100 py-1 ">
     <div class="px-0.5 pt-0.5 lg:px-8 ">
       <nav class="flex items-center">
         <div class="flex lg:flex-1">
-        <img src={Logo} class="h-20 w-20 float-left ml-16 rounded-full" alt="" />
+        <img src={Logo} class="h-10 w-10 float-left ml-16 rounded-full" alt="" />
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
           <NavLink
