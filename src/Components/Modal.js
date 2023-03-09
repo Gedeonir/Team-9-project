@@ -3,6 +3,41 @@ import DropDown from './DropDown';
 
 export default function Modal(props) {
     const [open,setOpen]=useState(false);
+    const [name,setName]=useState('');
+    const [category,setCategory]=useState('')
+    const [price,setPrice]=useState('');
+    const [image,setImage]=useState('');
+    const [description,setDescription]=useState('');
+    
+
+    console.log(name,category,price,image,description)
+
+    const handleCreate=async(e)=>{
+        e.preventDefault()
+        await fetch("http://localhost:3000/products",{
+        method:'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name:name,
+            description:description,
+            price:price,
+            Category:category,
+            image:image
+        }),
+        }
+        ).then(response=>{
+            console.log(response);
+            if (response.ok===true) {
+                alert("Created succesfully")
+                props.handleFetch(); props.setOpenModal(false)
+            }else{
+                alert("Adding product failed")
+            }
+            
+        })
+    }
 
   return (
     <div id="defaultModal" tabindex="-1" aria-hidden="true" class="absolute top-10 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
@@ -12,29 +47,34 @@ export default function Modal(props) {
                     <h3 class="text-xl font-semibold text-gray-900 ">
                         Create product form
                     </h3>
-                    <button onClick={()=>props.setOpenModal(false)} type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                    <button onClick={()=>props.setOpenModal(false)} type="button" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
                 
-                <form className='px-8 py-4'>
+                <form method='post' className='px-8 py-4'>
                     <div class="relative z-0 w-full mb-6 group">
-                        <input type="text" name="floating_title" id="floating_title" class="block py-2.5 px-0 w-full text-sm  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input type="text" value={name} onChange={(e)=>setName(e.target.value)} name="floating_title" id="floating_title" class="block py-2.5 px-0 w-full text-sm  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label for="floating_title" class="peer-focus:font-medium absolute text-sm text-gray-900  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Product name</label>
                     </div>
                    
-                    <button onClick={() => setOpen(!open)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="w-full mb-4 justify-between bg-gray-50 hover:bg-gray-100 focus:ring-1 focus:outline-none font-medium rounded-xs text-sm px-4 py-1 h-10 text-center inline-flex items-center " type="button">Category<svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                    <button onClick={() => setOpen(!open)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="w-full mb-4 justify-between bg-gray-50 hover:bg-gray-100 focus:ring-1 focus:outline-none font-medium rounded-xs text-sm px-4 py-1 h-10 text-center inline-flex items-center " type="button">{category ===''?(<>Category</>):(category)}<svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
                     {open &&
-                            <DropDown/>
+                            <DropDown setCategory={setCategory}/>
                         }
                     <div class="relative z-0 w-full mb-6 group">
-                        <input type="number" name="floating_price" id="floating_price" class="block py-2.5 px-0 w-full text-sm  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <input type="number" value={price} onChange={(e)=>setPrice(e.target.value)} name="floating_price" id="floating_price" class="block py-2.5 px-0 w-full text-sm  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                         <label for="floating_price" class="peer-focus:font-medium absolute text-sm text-gray-900  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Product price</label>
                     </div>
 
+                    <div class="relative z-0 w-full mb-6 group">
+                        <input type="text" value={image} onChange={(e)=>setImage(e.target.value)} name="floating_image" id="floating_image" class="block py-2.5 px-0 w-full text-sm  text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                        <label for="floating_image" class="peer-focus:font-medium absolute text-sm text-gray-900  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Image Link</label>
+                    </div>
+
                     <div className="mb-6">
-                        <label for="editor">Product description</label>
+                        <label for="editor" >Product description</label>
                         <div className="w-full mb-4 my-4 border border-gray-200 rounded-lg bg-gray-50">
                             <div className="flex items-center justify-between px-3 py-2 border-b border-gray-600">
                                 <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
@@ -89,13 +129,13 @@ export default function Modal(props) {
                                 </div>
                             </div>
                             <div className="px-4 py-2 bg-white rounded-b-lg">
-                                <textarea id="editor" rows="8" className="block w-full px-0 text-sm text-gray-800 bg-gray-50 border border-cyan-800 outline-none focus:ring-yellow-300 focus:border-gray-300" placeholder="Write  description..." required></textarea>
+                                <textarea id="editor" value={description} onChange={(e)=>setDescription(e.target.value)} rows="8" className="block w-full px-0 text-sm text-gray-800 bg-gray-50 border border-cyan-800 outline-none focus:ring-yellow-300 focus:border-gray-300" placeholder="Write  description..." required></textarea>
                             </div>
                         </div>
                     </div>
                     
                     
-                    <button type="submit" class="text-white my-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    <button type="submit" onClick={handleCreate} class="text-white my-4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </form>
 
             </div>
