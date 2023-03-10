@@ -8,6 +8,7 @@ export default function Modal(props) {
     const [price,setPrice]=useState('');
     const [image,setImage]=useState('');
     const [description,setDescription]=useState('');
+
     
 
     console.log(name,category,price,image,description)
