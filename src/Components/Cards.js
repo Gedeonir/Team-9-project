@@ -28,17 +28,24 @@ export default function Cards() {
 console.log(Filter)
   return (
     <><div className="lg:flex justify-between px-8 sm:block py-20">
-          <div className="mb-2 lg:w-64 sm:w-full">
-              <input type="text"
-                  id="searchWord"
-                  value={searchWord}
-                  onChange={(e)=>setSearchWord(e.target.value)}
-                  className="bg-gray-50 shadow text-sm rounded-xs outline-none focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2.5"
-                  placeholder="Search for products" required />
-          </div>
-          <button onClick={() => setOpen(!open)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="w-48 justify-between bg-gray-50 hover:bg-gray-100 focus:ring-1 focus:outline-none font-medium rounded-xs text-sm px-4 py-1 h-10 text-center inline-flex items-center " type="button">{category===''?(<>Filter by Region</>):(category)}<svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
+        <div className="mb-2 lg:w-64 sm:w-full">
+            <input type="text"
+                id="searchWord"
+                value={searchWord}
+                onChange={(e)=>setSearchWord(e.target.value)}
+                className="bg-gray-50 shadow text-sm rounded-xs outline-none focus:ring-yellow-300 focus:border-yellow-300 block w-full p-2.5"
+                placeholder="Search for products" required />
+        </div>
+        <div>
+            <button onClick={() => setOpen(!open)} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="w-48 justify-between bg-gray-50 hover:bg-gray-100 focus:ring-1 focus:outline-none font-medium rounded-xs text-sm px-4 py-1 h-10 text-center inline-flex items-center " type="button">{category===''?(<>Filter by Region</>):(category)}<svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
+            {category!==''&&
+            <button onClick={(e)=>setCategory('')} type="button" class="text-gray-900  bg-transparent hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="defaultModal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button> }
+
+        </div> 
           {open &&
-                <DropDown setCategory={setCategory}/>
+                <DropDown setCategory={setCategory} setOpen={setOpen}/>
             }
         </div>
         <div className='flex justify-between px-8'>
@@ -49,7 +56,7 @@ console.log(Filter)
         </div>
         {openModal&& <Modal setOpenModal={setOpenModal} handleFetch={handleFetch}/>}
         <hr/>
-        {Filter.length===0?(<p className='p-10 text-center'>No Result found!</p>):(
+        {Filter.length===0?(<p className='p-10 text-center'>No products found!</p>):(
             <div className="lg:grid lg:grid-cols-4 lg:gap-3 px-8 py-2  my-4 sm:block">
                 {Filter.map((product)=>{
                     return <Card key={product.id} image={product.image} category={product.Category} price={product.price} description={product.description}/>
