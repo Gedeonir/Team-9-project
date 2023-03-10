@@ -3,6 +3,14 @@ import React, { useState } from 'react'
 
 export default function Card(props) {
   const [open,setOpen]=useState(false)
+
+  const handleDelete=async(id)=>{
+    if (window.confirm("Are you sure you want to delete?")=== true) {
+      await fetch(`http://localhost:3000/products/${id}`,{method:"delete"})
+      props.handleFetch()
+    }
+
+  }
   return (
     <div className="block group my-4 border border-gray-300 rounded-md">
         <img
@@ -24,7 +32,7 @@ export default function Card(props) {
                 <li onClick={()=>setOpen(false)} className="px-3 py-2 w-full text-left cursor-pointer hover:bg-gray-50">
                     Edit
                 </li>
-                <li onClick={()=>setOpen(false)} className="px-3 py-2 w-full text-left cursor-pointer hover:bg-gray-50">
+                <li onClick={()=>{setOpen(false);handleDelete(props.id)}} className="px-3 py-2 w-full text-left cursor-pointer hover:bg-gray-50">
                     Delete
                 </li>
                 

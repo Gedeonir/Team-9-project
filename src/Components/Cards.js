@@ -59,7 +59,7 @@ console.log(Filter)
         {Filter.length===0?(<p className='p-10 text-center'>No products found!</p>):(
             <div className="lg:grid lg:grid-cols-4 lg:gap-3 px-8 py-2  my-4 sm:block">
                 {Filter.map((product)=>{
-                    return <Card key={product.id} image={product.image} category={product.Category} price={product.price} description={product.description}/>
+                    return <Card key={product.id} id={product.id} handleFetch={handleFetch} image={product.image} category={product.Category} price={product.price} description={product.description}/>
                 })}
             </div>
         )}
